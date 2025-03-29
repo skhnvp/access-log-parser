@@ -46,7 +46,7 @@ try {
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File f = new File("sdfsdf"); // access 1024
+        File f = new File("access.log"); // access 1024
 
         if (f.isFile()) {
             FileReader fileReader = new FileReader(f);
