@@ -14,7 +14,7 @@ public class LogEntry {
     private final LocalDateTime timestamp;
     private final MethodsHTTP methodHTTP;
     private final String url;
-    private final String responseCode;
+    private final int responseCode;
     private final int traffic;
     private final String referer;
     private final UserAgent userAgent;
@@ -41,7 +41,7 @@ public class LogEntry {
 
             this.methodHTTP = MethodsHTTP.valueOf(matcher.group(3));
             this.url = matcher.group(4);
-            this.responseCode = matcher.group(5);
+            this.responseCode = Integer.parseInt(matcher.group(5));
             this.traffic = Integer.parseInt(matcher.group(6));
 
             if(!matcher.group(7).equals("-")) {
