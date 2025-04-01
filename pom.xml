@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.stepup.Main</mainClass>
+                            <mainClass>com.stepup.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

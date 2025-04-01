@@ -1,4 +1,4 @@
-package com.stepup;
+package com.stepup.exc;
 
 public class tooBigLine extends RuntimeException {
     public tooBigLine() {
