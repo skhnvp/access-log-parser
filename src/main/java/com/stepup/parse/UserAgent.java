@@ -74,6 +74,14 @@ public class UserAgent {
         return Browsers.UNIDENTIFIED;
     }
 
+    @Override
+    public String toString() {
+        return "UserAgent{" +
+                "systemType=" + systemType +
+                ", browserType=" + browserType +
+                '}';
+    }
+
     public Systems checkSystem(String userAgentLine) {
         for (Systems system : Systems.values()) {
             if (system.code == null) {

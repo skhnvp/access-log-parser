@@ -89,5 +89,12 @@ public class Main {
 
         System.out.println(Statistics.getTrafficRate());
 
+        System.out.println("Частота встречаемости каждой операционной системы: " + Statistics.getAllSystems());
+        System.out.println("Доли операционных систем: " + Statistics.statSystems());
+
+        //System.out.println("Список всех существующих страниц: " + Statistics.getAllUrls());
+
+
+
     }
 }
