@@ -77,7 +77,7 @@ public class LogEntry {
         return url;
     }
 
-    public String getResponseCode() {
+    public int getResponseCode() {
         return responseCode;
     }
 
@@ -90,6 +90,11 @@ public class LogEntry {
     }
 
     public UserAgent getUserAgent() {
-        return new UserAgent(this.userAgent.getSystemType(),this.userAgent.getBrowserType());
+        if (userAgent == null) {
+            return null;
+        } else {
+            return new UserAgent(this.userAgent.getSystemType(),this.userAgent.getBrowserType());
+        }
+
     }
 }
