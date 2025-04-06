@@ -16,6 +16,8 @@ public class Statistics {
     private static LocalDateTime maxTime;
     private static Set<String> setUrls = new HashSet<>();
     private static Map<String, Integer> mapSystems = new HashMap<>();
+    private static Set<String> setNotFoundedUrls = new HashSet<>();
+    private static Map<String, Integer> mapBrowsers = new HashMap<>();
 
     public Statistics() {
     }
@@ -30,8 +32,10 @@ public class Statistics {
         if (maxTime == null || maxTime.isBefore(le.getTimestamp())) {
             maxTime = le.getTimestamp();
         }
-        if (le.getUrl() != null || le.getResponseCode() == 200) {
+        if (le.getResponseCode() == 200) {
             setUrls.add(le.getUrl());
+        } else if (le.getResponseCode() == 404) {
+            setNotFoundedUrls.add(le.getUrl());
         }
         if (le.getUserAgent() != null) {
             if (mapSystems.containsKey(le.getUserAgent().getSystemType().toString())) {
@@ -40,23 +44,32 @@ public class Statistics {
                 mapSystems.put(le.getUserAgent().getSystemType().toString(), 1);
             }
 
+            if (mapBrowsers.containsKey(le.getUserAgent().getBrowserType().toString())) {
+                mapBrowsers.put(le.getUserAgent().getBrowserType().toString(), mapBrowsers.get(le.getUserAgent().getBrowserType().toString()) + 1);
+            } else {
+                mapBrowsers.put(le.getUserAgent().getBrowserType().toString(), 1);
+            }
         }
 
     }
 
-    public static Map<String, Double> statSystems() {
+    public static Map<String, Double> getStatistics(Map<String, Integer> map) {
         double sum = 0;
         Map<String, Double> statMap = new HashMap<>();
 
-        for (Integer i : mapSystems.values()) {
+        for (Integer i : map.values()) {
             sum += i;
         }
 
-        for (String s : mapSystems.keySet()) {
-            statMap.put(s, Math.round((mapSystems.get(s) / sum) * 100) / 100. );
+        for (String s : map.keySet()) {
+            statMap.put(s, Math.round((map.get(s) / sum) * 100) / 100. );
         }
 
         return statMap;
+    }
+
+    public static Map<String, Integer> getAllBrowsers() {
+        return new HashMap<>(mapBrowsers);
     }
 
     public static Set<String> getAllUrls() {
