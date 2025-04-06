@@ -1,8 +1,7 @@
 package com.stepup.libs;
 
 public enum Systems {
-    YANDEXBOT("YandexBot"),
-    GOOGLEBOT("Googlebot"),
+    BOT("Bot"),
     WINDOWS("Windows"),
     MACINTOSH("Macintosh"),
     IPHONE("iPhone"),
