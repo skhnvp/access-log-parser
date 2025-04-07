@@ -104,14 +104,14 @@ public class Statistics {
         return statMap;
     }
 
-    public static long countAvgPerHour(long count, LocalDateTime minTime, LocalDateTime maxTime) {
+    public static double countAvgPerHour(long count, LocalDateTime minTime, LocalDateTime maxTime) {
         //Общий метод подсчитывания среднего кол-ва countable переменных за время
-        return count / Duration.between(minTime, maxTime).toHours();
+        return (double) count / Duration.between(minTime, maxTime).toHours();
     }
 
-    public static long countAvgOneUserReq() {
+    public static double countAvgOneUserReq() {
         //Метод расчёта средней посещаемости одним пользователем.
-        return countNotUnicUsers / mapUnicUsers.size();
+        return (double) countNotUnicUsers / mapUnicUsers.size();
     }
 
     public static Optional<Integer> getMaxFromMapValues(Collection<Integer> valuesFromMap) {
