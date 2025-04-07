@@ -1,15 +1,13 @@
 package com.stepup.stat;
 
-import com.stepup.libs.MethodsHTTP;
 import com.stepup.libs.Systems;
 import com.stepup.parse.LogEntry;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Statistics {
     private static long totalTraffic = 0;
@@ -19,9 +17,11 @@ public class Statistics {
     private static Map<String, Integer> mapSystems = new HashMap<>();
     private static Set<String> setNotFoundedUrls = new HashSet<>();
     private static Map<String, Integer> mapBrowsers = new HashMap<>();
-    private static long countUsers = 0;
+    private static long countNotUnicUsers = 0;
     private static long countFailureReq = 0;
-    private static Set<String> setUsers = new HashSet<>();
+    private static Map<LocalDateTime, Integer> rps = new HashMap<>();
+    private static Set<String> setRefers = new HashSet<>();
+    private static Map<String, Integer> mapUnicUsers = new HashMap<>();
 
     public Statistics() {
     }
@@ -29,6 +29,15 @@ public class Statistics {
 
     public static void addEntry(LogEntry le) {
         totalTraffic += le.getTraffic();
+
+        if (rps.containsKey(le.getTimestamp())
+                && le.getUserAgent() != null
+                && le.getUserAgent().getSystemType() != Systems.UNIDENTIFIED
+                && le.getUserAgent().getSystemType() != Systems.BOT) {
+            rps.put(le.getTimestamp(), rps.get(le.getTimestamp()) + 1);
+        } else {
+            rps.put(le.getTimestamp(), 1);
+        }
 
         if (minTime == null || minTime.isAfter(le.getTimestamp())) {
             minTime = le.getTimestamp();
@@ -59,11 +68,24 @@ public class Statistics {
 
             if (!le.getUserAgent().getSystemType().equals(Systems.BOT)
                     || !le.getUserAgent().getSystemType().equals(Systems.UNIDENTIFIED)) {
-                countUsers++;
-                setUsers.add(le.getIp());
+                countNotUnicUsers++;
+                if (mapUnicUsers.containsKey(le.getIp())) { //
+                    mapUnicUsers.put(le.getIp(), mapUnicUsers.get(le.getIp()) + 1);
+                } else {
+                    mapUnicUsers.put(le.getIp(), 1);
+                }
+
+
+                //setUsers.add();
             }
         }
-
+        if (le.getReferer() != null) {
+            Pattern pattern = Pattern.compile("^https?://([^/]+)");
+            Matcher matcher = pattern.matcher(le.getReferer());
+            if (matcher.find()) {
+                setRefers.add(matcher.group(1));
+            }
+        }
     }
 
     public static Map<String, Double> getStatistics(Map<String, Integer> map) {
@@ -89,13 +111,30 @@ public class Statistics {
 
     public static long countAvgOneUserReq() {
         //Метод расчёта средней посещаемости одним пользователем.
-        return countUsers/setUsers.size();
+        return countNotUnicUsers / mapUnicUsers.size();
     }
 
-    ///GETTERS SETTERS:
+    public static Optional<Integer> getMax(Collection<Integer> map) {
+        //метод для возврата максимального значения стрима
+        return map.stream().max(Comparator.naturalOrder());
+    }
 
-    public static long getCountUsers() {
-        return countUsers;
+    public static Set<String> getAllRefers() {
+        return new HashSet<>(setRefers);
+    }
+
+    public static Map<String, Integer> getMapUnicUsers() {
+        return new HashMap<>(mapUnicUsers);
+    }
+
+    /// GETTERS SETTERS:
+
+    public static Map<LocalDateTime, Integer> getRps() {
+        return new HashMap<>(rps);
+    }
+
+    public static long getCountNotUnicUsers() {
+        return countNotUnicUsers;
     }
 
     public static long getCountFailureReq() {

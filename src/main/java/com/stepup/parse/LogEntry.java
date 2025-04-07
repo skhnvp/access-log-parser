@@ -20,16 +20,7 @@ public class LogEntry {
     private final UserAgent userAgent;
 
     public LogEntry(String line) {
-
-        //Example
-        // "44.135.240.229 - - [25/Sep/2022:06:25:08 +0300] \"GET /housekeeping/?lg=2&p=506&rss=1&t=2 HTTP/1.0\" 200 1368 \"https://rosinform.ru/rubric/top/maks2015/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362\"";
         Pattern pattern = Pattern.compile("^(.+) \\S \\S \\[(.+?)\\] \"(\\w{3,4}) (.+?) HTTP/\\d\\.\\d\" (\\d{3}) (\\d+) \"(.+|-)\" \"(.+|-)\"$");
-        /*
-         * Ради интереса научился немного работать с регуляркой
-         * По сути разделил строку так же на пробелы
-         * Выделил важные мне блоки () и указал что мне не важно содержимое используя .+ и .+|- (если блок пустой "-")
-         */
-
         Matcher matcher = pattern.matcher(line);
 
         if (matcher.find()) {
