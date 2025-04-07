@@ -81,8 +81,8 @@ public class Main {
 
         //System.out.println("Список всех существующих страниц: " + Statistics.getAllUrls());
 
-        System.out.println("Метод расчёта пиковой посещаемости сайта (в секунду). Наибольшее кол-во запросов в секунду: " + Statistics.getMax(Statistics.getRps().values()).get());
+        System.out.println("Метод расчёта пиковой посещаемости сайта (в секунду). Наибольшее кол-во запросов в секунду: " + Statistics.getMaxFromMapValues(Statistics.getRps().values()).get());
         System.out.println("Метод, возвращающий список сайтов, со страниц которых есть ссылки на текущий сайт: " + Statistics.getAllRefers());
-        System.out.println("Метод расчёта максимальной посещаемости одним пользователем: " + Statistics.getMax(Statistics.getMapUnicUsers().values()).get());
+        System.out.println("Метод расчёта максимальной посещаемости одним пользователем: " + Statistics.getMaxFromMapValues(Statistics.getMapUnicUsers().values()).get());
     }
 }

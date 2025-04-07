@@ -114,7 +114,7 @@ public class Statistics {
         return countNotUnicUsers / mapUnicUsers.size();
     }
 
-    public static Optional<Integer> getMax(Collection<Integer> valuesFromMap) {
+    public static Optional<Integer> getMaxFromMapValues(Collection<Integer> valuesFromMap) {
         //метод для возврата максимального значения стрима
         return valuesFromMap.stream().max(Comparator.naturalOrder());
     }
