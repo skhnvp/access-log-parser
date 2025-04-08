@@ -2,6 +2,7 @@ package com.stepup.main;
 
 import com.stepup.parse.LogEntry;
 import com.stepup.exc.tooBigLine;
+import com.stepup.parse.UserAgent;
 import com.stepup.stat.Statistics;
 
 import java.io.*;
@@ -36,7 +37,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File f = new File("access.log"); // access 1024
+        File f = new File("access.log"); // access 1024 1
 
 
         if (f.isFile()) {
@@ -84,5 +85,8 @@ public class Main {
         System.out.println("Метод расчёта пиковой посещаемости сайта (в секунду). Наибольшее кол-во запросов в секунду: " + Statistics.getMaxFromMapValues(Statistics.getRps().values()).get());
         System.out.println("Метод, возвращающий список сайтов, со страниц которых есть ссылки на текущий сайт: " + Statistics.getAllRefers());
         System.out.println("Метод расчёта максимальной посещаемости одним пользователем: " + Statistics.getMaxFromMapValues(Statistics.getMapUnicUsers().values()).get());
+
+
+
     }
 }
