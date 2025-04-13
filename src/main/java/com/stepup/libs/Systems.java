@@ -1,13 +1,13 @@
 package com.stepup.libs;
 
 public enum Systems {
-    BOT("Bot"),
-    WINDOWS("Windows"),
-    MACINTOSH("Macintosh"),
-    IPHONE("iPhone"),
-    ANDROID("Android"),
-    LINUX("X11"),
-    UNIDENTIFIED(null);
+    BOT("bot"),
+    WINDOWS("windows"),
+    MACINTOSH("mac os x"),
+    IPHONE("ios"),
+    ANDROID("android"),
+    LINUX("linux"),
+    OTHER("other");
 
     public String code;
 

@@ -1,0 +1,2 @@
+109.195.139.199 - - [25/Sep/2022:06:25:14 +0300] "GET /housekeeping/?rss=1&p=53&lg=1 HTTP/1.0" 200 2514 "https://www.nova-news.ru//cooking/?rss=1&p=53&lg=1" "Mozilla/5.0 (iPad; CPU OS 9_3_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/17.1.129017588 Mobile/13G35 Safari/600.1.4"
+189.21.214.2 - - [25/Sep/2022:01:56:26 +0300] "GET /parliament/november-reports/news HTTP/1.0" 200 13300 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"

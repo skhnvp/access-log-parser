@@ -1,16 +1,16 @@
 package com.stepup.libs;
 
 public enum Browsers {
-    FIREFOX("Firefox"),
-    OPERA("OPR"),
-    EDGE("Edg"),
-    CHROME("Safari","Chrome"),
-    SAFARI("Safari","Version"),
-    UNIDENTIFIED(null);
+    FIREFOX("firefox"),
+    OPERA("opera"),
+    EDGE("edge"),
+    CHROME("chrome"),
+    SAFARI("safari"),
+    OTHER("other");
 
-    public String[] codes;
+    public String code;
 
-    Browsers(String... codes) {
-        this.codes = codes;
+    Browsers(String code) {
+        this.code = code;
     }
 }
